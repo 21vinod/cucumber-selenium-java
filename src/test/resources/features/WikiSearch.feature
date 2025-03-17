@@ -1,4 +1,4 @@
-@wiki
+@web @wiki
 Feature: Wiki search features
   WPS-7531
 

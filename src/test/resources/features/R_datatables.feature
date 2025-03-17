@@ -1,5 +1,5 @@
 
-@vytrackdatatable
+@vytrackdatatable @web
 Feature: Examples for DataTable
 
 

@@ -1,3 +1,4 @@
+@web
 Feature: Cucumber Data Tables implementation practices
 
   @dataTable

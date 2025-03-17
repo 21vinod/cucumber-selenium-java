@@ -38,20 +38,20 @@ public class Hooks {
 
         System.out.println("---> @After: RUNNING AFTER EACH SCENARIO");
 
-        BrowserUtils.sleep(2);
-        Driver.closeDriver();
+//        BrowserUtils.sleep(2);
+//        Driver.closeDriver();
 
     }
 
-    //@BeforeStep
-    public void setupStep(){
-        System.out.println("-----> @BeforeSTEP : Running before each step!");
-    }
-
-    //@AfterStep
-    public void teardownStep(){
-        System.out.println("-----> @AfterSTEP : Running after each step!");
-    }
+//    //@BeforeStep
+//    public void setupStep(){
+//        System.out.println("-----> @BeforeSTEP : Running before each step!");
+//    }
+//
+//    //@AfterStep
+//    public void teardownStep(){
+//        System.out.println("-----> @AfterSTEP : Running after each step!");
+//    }
 
 
 }

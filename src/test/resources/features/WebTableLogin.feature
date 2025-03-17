@@ -1,3 +1,4 @@
+@web
 Feature: Web table app login functionality
   Agile story: User should be able to login with correct credentials
 

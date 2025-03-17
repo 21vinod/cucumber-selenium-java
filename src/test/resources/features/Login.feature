@@ -1,4 +1,4 @@
-@regression @login
+@regression @login @web
 Feature: Library login feature
 
   User Story:
