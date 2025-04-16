@@ -6,17 +6,12 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-//        plugin = {
-//
-//        "html:target/cucumber-reports.html",
-//                "rerun:target/rerun.txt",
-//                "me.jvt.cucumber.report.PrettyReports:target/cucumber"
-//        },
+//        plugin = { "html:target/cucumber-reports.html", "rerun:target/rerun.txt", "me.jvt.cucumber.report.PrettyReports:target/cucumber"},
         plugin = {"pretty", "html:target/cucumber-reports/test1.html"},
         features = "src/test/resources/features",
         glue = "com/vinod/step_definitions",
         dryRun = false,
-        tags = "",
+        tags = "@web",
         publish = false //generating a report with public link
 )
 
