@@ -14,10 +14,6 @@ public class Google_StepDefinations {
     public Google_StepDefinations() {
     }
 
-    @Given("I launch {string} on {string}")
-    public void iLaunchWebsite(String url, String platform) {
-        driver.get(url);
-    }
 
     @Then("I should see {string} in the title")
     public void iShouldSeeTitle(String expectedTitle) {

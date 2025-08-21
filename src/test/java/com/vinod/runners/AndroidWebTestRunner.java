@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt",
                 "me.jvt.cucumber.report.PrettyReports:target/cucumber"},
 //        plugin = {"pretty", "html:target/cucumber-reports/test1.html"},
-        features = "src/test/resources/features/android",
+        features = "src/test/resources/features/android/real_device_with_apk.feature",//"src/test/resources/features/android",///real_device_with_apk.feature
         glue = "com/vinod/step_definitions",
         dryRun = false,
         tags = "",

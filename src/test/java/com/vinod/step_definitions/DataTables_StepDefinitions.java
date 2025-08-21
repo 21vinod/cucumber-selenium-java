@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,14 +48,32 @@ public class DataTables_StepDefinitions {
 
     }
 
-    DropdownsPage dropdownsPage = new DropdownsPage();
+
 
     @Then("User should see below info in month dropdown")
     public void user_should_see_below_info_in_month_dropdown(List<String> expectedMonths) {
-
+        DropdownsPage dropdownsPage = new DropdownsPage();
         List<String> actualMonths = BrowserUtils.dropdownOptions_as_STRING(dropdownsPage.monthDropdown);
-
+        System.out.println("actuals"+actualMonths);
+        System.out.println("expected:"+expectedMonths);
         Assert.assertEquals(expectedMonths, actualMonths );
+
+    }
+
+    @Then("we should see table with below content")
+    public void we_should_see_table_with_below_content(List<Map<String,String>> products) {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+        // Double, Byte, Short, Long, BigInteger or BigDecimal.
+        //
+        // For other transformations you can register a DataTableType.
+        System.out.println(products);
+        for(Map<String, String> map: products){
+            System.out.println(map.get("Product")+" "+map.get("Price"));
+        }
+
 
     }
 }

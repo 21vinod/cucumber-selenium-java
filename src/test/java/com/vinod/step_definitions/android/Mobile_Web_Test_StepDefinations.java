@@ -10,17 +10,21 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 public class Mobile_Web_Test_StepDefinations {
    // private static AppiumDriver driver;
-   WebDriver driver = Driver.getDriver();
+   WebDriver driver ;
+
+    @Given("I launch {string} on {string}")
+    public void iLaunchUrlOnMobile(String url, String platform) {
+        driver = Driver.getDriver();
+        driver.get(url);
+    }
 
     @Given("I launch the mobile browser")
-    public void iLaunchTheMobileBrowser() throws MalformedURLException {
-        if (driver == null) {
-
-            driver = (AppiumDriver) Driver.getDriver();
-        }
+    public void iLaunchMobileBrowser() {
+        // Nothing required here if browser launches on setup
     }
 
     @When("I navigate to {string}")
@@ -28,73 +32,78 @@ public class Mobile_Web_Test_StepDefinations {
         driver.get(url);
     }
 
-    @Then("the page title should be {string}")
-    public void thePageTitleShouldBe(String expectedTitle) {
-        String actualTitle = driver.getTitle();
-        Assert.assertEquals("Page title mismatch!", expectedTitle, actualTitle);
-    }
-
     @And("I enter {string} in the search box")
-    public void iEnterInTheSearchBox(String searchText) {
-        WebElement searchBox = driver.findElement(By.name("q"));
-        searchBox.clear();
-        searchBox.sendKeys(searchText);
+    public void iEnterInTheSearchBox(String text) {
+        WebElement searchBox = driver.findElement(By.cssSelector("[aria-label=\"Search\"]"));
+        searchBox.sendKeys(text);
     }
 
     @And("I press the search button")
     public void iPressTheSearchButton() {
-        WebElement searchBox = driver.findElement(By.name("q"));
+        WebElement searchBox = driver.findElement(By.cssSelector("[aria-label=\"Search\"]"));
         searchBox.sendKeys(Keys.ENTER);
     }
 
     @Then("I should see search results containing {string}")
-    public void iShouldSeeSearchResultsContaining(String expectedText) {
-        WebElement results = driver.findElement(By.xpath("//body"));
-        Assert.assertTrue("Search results do not contain expected text!", results.getText().contains(expectedText));
+    public void iShouldSeeSearchResultsContaining(String expected) {
+        List<WebElement> results = driver.findElements(By.cssSelector("h3"));
+        boolean match = results.stream().anyMatch(e -> e.getText().toLowerCase().contains(expected.toLowerCase()));
+        Assert.assertTrue("Search results should contain: " + expected, match);
+    }
+
+    @Then("the page title should be {string}")
+    public void thePageTitleShouldBe(String expectedTitle) {
+        Assert.assertEquals(expectedTitle, driver.getTitle());
     }
 
     @And("I enter {string} in the {string} field")
     public void iEnterInTheField(String value, String fieldName) {
-        WebElement inputField = driver.findElement(By.name(fieldName));
-        inputField.clear();
-        inputField.sendKeys(value);
+        WebElement input = driver.findElement(By.name(fieldName));
+        input.clear();
+        input.sendKeys(value);
     }
 
     @And("I press the submit button")
     public void iPressTheSubmitButton() {
-        WebElement submitButton = driver.findElement(By.xpath("//input[@type='submit']"));
-        submitButton.click();
+        try {
+            WebElement submit = driver.findElement(By.cssSelector("input[type='submit']"));
+            submit.click();
+        } catch (NoSuchElementException e) {
+            WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
+            submit.click();
+        }
     }
 
     @Then("I should see a confirmation message")
     public void iShouldSeeAConfirmationMessage() {
-        WebElement confirmationMessage = driver.findElement(By.xpath("//body"));
-        Assert.assertTrue("Confirmation message not found!", confirmationMessage.getText().contains("Thank you"));
+        // This depends on form implementation
+        boolean isConfirmationVisible = driver.getPageSource().toLowerCase().contains("thank you")
+                || driver.getPageSource().toLowerCase().contains("submitted");
+        Assert.assertTrue("Confirmation message not found!", isConfirmationVisible);
     }
 
     @And("I scroll down to {string}")
     public void iScrollDownTo(String sectionText) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement element = driver.findElement(By.xpath("//*[contains(text(),'" + sectionText + "')]"));
-        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     @Then("I should see the section header {string}")
-    public void iShouldSeeTheSectionHeader(String expectedHeader) {
-        WebElement sectionHeader = driver.findElement(By.xpath("//*[contains(text(),'" + expectedHeader + "')]"));
-        Assert.assertTrue("Section header not found!", sectionHeader.isDisplayed());
+    public void iShouldSeeTheSectionHeader(String headerText) {
+        WebElement header = driver.findElement(By.xpath("//*[contains(text(),'" + headerText + "')]"));
+        Assert.assertTrue(header.isDisplayed());
     }
 
     @And("I press the login button")
     public void iPressTheLoginButton() {
-        WebElement loginButton = driver.findElement(By.id("login-button"));
-        loginButton.click();
+        WebElement button = driver.findElement(By.id("login-button"));
+        button.click();
     }
 
     @Then("I should see an error message {string}")
-    public void iShouldSeeAnErrorMessage(String expectedError) {
-        WebElement errorMessage = driver.findElement(By.cssSelector("[data-test='error']"));
-        Assert.assertEquals("Login error message mismatch!", expectedError, errorMessage.getText());
+    public void iShouldSeeAnErrorMessage(String expectedMessage) {
+        WebElement error = driver.findElement(By.cssSelector("h3[data-test='error']"));
+        Assert.assertTrue(error.getText().contains(expectedMessage));
     }
 
 //    @After

@@ -1,4 +1,4 @@
-@web
+@web @dataTables
 Feature: Cucumber Data Tables implementation practices
 
   @dataTable
@@ -39,6 +39,7 @@ Feature: Cucumber Data Tables implementation practices
       | phone   | 111-1111-1111 |
 
 
+    @listMap
   Scenario: User should be able to see all 12 months in months
   dropdown
     Given User is on the dropdowns page of practice tool
@@ -55,6 +56,12 @@ Feature: Cucumber Data Tables implementation practices
       | October   |
       | November  |
       | December  |
+    And we should see table with below content
+    # for the same of simplicity below table is modified to match exactly to actual table
+      | Product     | Price | Discount |
+      | MyMoney     | $100  | 8%       |
+      | FamilyAlbum | $80   | 15%      |
+      | ScreenSaver | $20   | 10%      |
 
 
 

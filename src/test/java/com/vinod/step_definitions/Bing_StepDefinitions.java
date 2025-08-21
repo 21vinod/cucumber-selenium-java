@@ -27,6 +27,7 @@ public class Bing_StepDefinitions {
     @When("user enters orange in the Bing search box")
     public void user_enters_orange_in_the_bing_search_box() {
         bingSearchPage.searchBox.sendKeys("orange" + Keys.ENTER);
+
     }
 
 

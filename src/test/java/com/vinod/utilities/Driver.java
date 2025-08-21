@@ -67,10 +67,20 @@ public class Driver {
 
                 case "mobile-web":
                     DesiredCapabilities caps = new DesiredCapabilities();
-                    caps.setCapability("platformName", "Android");
-                    caps.setCapability("browserName", "Chrome");
-                    caps.setCapability("deviceName", "Pixel_5");
-                    caps.setCapability("automationName", "UiAutomator2");
+                    caps.setCapability("appium:platformName", "Android");
+                    caps.setCapability("appium:deviceName", "R3CR40B5SRA");
+                    caps.setCapability("appium:automationName", "UiAutomator2");
+                    caps.setCapability("appium:app","X:/P_Projects/QAPath/Cucumber-Selenium-Java/files/ApiDemos-debug.apk");
+                    caps.setCapability("browserName", "Edge");
+                    caps.setCapability("chromedriverAutodownload", true);
+                    caps.setCapability("appium:enforceXPath1", true);
+
+//                {
+//                    "appium:automationName": "UiAutomator2",
+//                        "appium:platformName": "Android",
+//                        "appium:deviceName": "R3CR40B5SRA",
+//                        "appium:app": "X:/P_Projects/QAPath/Cucumber-Selenium-Java/files/ApiDemos-debug.apk"
+//                }
                     try {
                         driverPool.set(new AndroidDriver(new URL("http://127.0.0.1:4723"), caps));
                     } catch (MalformedURLException e) {

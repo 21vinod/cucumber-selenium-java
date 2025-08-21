@@ -1,3 +1,4 @@
+/*
 package com.vinod.step_definitions;
 
 import com.vinod.utilities.BrowserUtils;
@@ -6,10 +7,12 @@ import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+*/
 /*
 In this class we will be able to create "pre" and "post" condition
 for ALL the SCENARIOS and even STEPS.
- */
+ *//*
+
 public class Hooks {
 
     //import the @Before coming from io.cucumber.java
@@ -23,9 +26,11 @@ public class Hooks {
         System.out.println("---> @Before: RUNNING BEFORE EACH SCENARIO");
     }
 
-    /*
+    */
+/*
     @After will be executed automatically after EVERY scenario in the project.
-     */
+     *//*
+
     @After
     public void teardownMethod(Scenario scenario){
 
@@ -55,3 +60,4 @@ public class Hooks {
 
 
 }
+*/
